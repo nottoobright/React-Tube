@@ -5,6 +5,7 @@ import YTSearch from 'youtube-api-search';
 
 //custom imports
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 
 const API_KEY = 'AIzaSyAzycprsns3_sLy-mmE5nlpEjIFLuKGDs8';
 //Create a new component. This component should 
@@ -24,9 +25,10 @@ class App extends Component {
         return (
             <div>
                 <SearchBar/>
+                <VideoList videos = { this.state.videos} />
             </div>
         );
-    }
+    };
 }
 
 //Take this component's generated HTML and put
