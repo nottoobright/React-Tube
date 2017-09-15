@@ -6,29 +6,39 @@ import YTSearch from 'youtube-api-search';
 //custom imports
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyAzycprsns3_sLy-mmE5nlpEjIFLuKGDs8';
 //Create a new component. This component should 
 //produce some HTML
 
 class App extends Component {
-    constructor(props){
-        super(props);
+	constructor(props){
+		super(props);
 
-        this.state = {videos: []};
+		this.state = {
+			videos: [],
+			selectedVideo: null
+		};
 
-        YTSearch({key: API_KEY, term:'Ciao Adios'}, videos => {
-            this.setState({ videos });
-        });
-    }
-    render() {
-        return (
-            <div>
-                <SearchBar/>
-                <VideoList videos = { this.state.videos} />
-            </div>
-        );
-    };
+		YTSearch({key: API_KEY, term:'Ciao Adios'}, videos => {
+			this.setState({ 
+				videos: videos,
+				selectedVideo: videos[0]
+			});
+		});
+	}
+	render() {
+		return (
+			<div>
+				<SearchBar/>
+				<VideoDetail video = { this.state.selectedVideo}/>
+				<VideoList 
+					onVideoSelect = { selectedVideo => this.setState({ selectedVideo })}
+					videos = { this.state.videos} />
+			</div>
+		);
+	}
 }
 
 //Take this component's generated HTML and put
