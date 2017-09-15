@@ -1,6 +1,7 @@
 //import statements
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
 import YTSearch from 'youtube-api-search';
 
 //custom imports
@@ -34,6 +35,8 @@ class App extends Component {
 	}
 
 	render() {
+		const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+
 		return (
 			<div>
 				<SearchBar onSearch = {term => this.videoSearch(term)}/>
